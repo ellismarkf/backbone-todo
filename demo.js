@@ -14,9 +14,43 @@ var myTodo = new Todo({
 });
 
 // define the backbone view
+
 var TodoView = Backbone.View.extend({
 	tagname: 'li',
 
-	todoTmpl: _.template($('#item-template'))
-})
+	todoTmpl: _.template( $('#item-template').html() ),
+
+	events: {
+		'dblclick label': 	'edit',
+		'keypress .edit': 	'updateOnEnter',
+		'blur .edit': 		'close'
+	},
+
+	initialize: function() {
+		this.$el = $('#todo');
+	},
+
+	render: function() {
+		this.$el.html( this.todoTmpl( this.model.attributes ) );
+		this.input = this.$('.edit');
+		return this;
+	},
+
+	edit: function() {
+
+	},
+
+	close: function() {
+
+	},
+
+	updateOnEnter: function( event ) {
+
+	}
+
+});
+
+// instantiate the backbone view
+
+var todoView = new TodoView({ model: myTodo });
 
